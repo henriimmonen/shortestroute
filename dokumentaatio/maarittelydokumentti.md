@@ -13,5 +13,6 @@ Kyseisen aiheen valintaan motivoi ohjelmistotekniikan kurssilla toteuttamani Pac
 Projektin dokumentaatio tulee olemaan suomenkielinen.  
 Työn tekijä on tietojenkäsittelytieteen kandidaatin tutkintoa suorittava opiskelija. 
 
-
+### Lähteet
+[Jump Point Search](http://users.cecs.anu.edu.au/~dharabor/data/papers/harabor-grastien-aaai11.pdf)
 
