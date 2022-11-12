@@ -8,7 +8,7 @@ class TestRoute(unittest.TestCase):
         self.kartta = ['...','.@@','...']
         self.verkko = [[(0,1), (1,0)], [(0,0), (0,2)], [(0,1)], [(0,0), (2,0)], [],
                         [], [(1,0), (2,1)], [(2,0), (2,2)], [(2,1)]]
-        self.d = Dijkstra((0,0), (4,4), self.verkko, self.kartta)
+        self.d = Dijkstra((0,0), (2,2), self.verkko, self.kartta)
     
     def test_kartan_alustaminen(self):
         alustettu_kartta = self.a.alusta_kartta('./test.map')
@@ -40,4 +40,8 @@ class TestRoute(unittest.TestCase):
 
     def test_dijkstra_etsii_oikean_reitin(self):
         self.assertEqual(self.d.etsi_reitti(), [-1, 0, 1, 0, -1, -1, 3, 6, 7])
+
+    def test_dijkstra_tulostaa_oikean_reitin(self):
+        etaisyys = self.d.etsi_reitti()
+        self.assertEqual(self.d.tulosta_reitti(etaisyys), [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)])
 

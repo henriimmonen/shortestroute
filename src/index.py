@@ -10,18 +10,7 @@ def main():
 
     d = Dijkstra(alku, loppu, verkko, kartta)
     etaisyys = d.etsi_reitti()
-
-    path = []
-    edeltava = loppu[0]*len(kartta[0])+loppu[1]
-    path.append(edeltava)
-
-    while etaisyys[edeltava] != -1:
-        path.append(etaisyys[edeltava])
-        edeltava = etaisyys[edeltava]
-
-    print("Polku ruudusta:", alku, 'ruutuun', loppu, ': ')
-    for i in range(len(path)-1, -1, -1):
-        print((path[i]//len(kartta[0]), path[i]%len(kartta[0])))
+    print(d.tulosta_reitti(etaisyys))
 
 if __name__ == '__main__':
     main()

@@ -28,3 +28,15 @@ class Dijkstra():
                 self.edeltava[naapuri[0]*len(self.kartta[0])+naapuri[1]] = (solmu[0]*len(self.kartta[0])+solmu[1])
         return self.edeltava
 
+    def tulosta_reitti(self, etaisyys):
+        reitti = []
+        edeltava = self.loppu[0]*len(self.kartta[0])+self.loppu[1]
+        reitti.append(edeltava)
+
+        while etaisyys[edeltava] != -1:
+            reitti.append(etaisyys[edeltava])
+            edeltava = etaisyys[edeltava]
+        reitti_oikein_pain = []
+        for i in range(len(reitti)-1, -1, -1):
+            reitti_oikein_pain.append((reitti[i]//len(self.kartta[0]), reitti[i]%len(self.kartta[0])))
+        return reitti_oikein_pain
