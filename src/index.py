@@ -1,9 +1,8 @@
 from dijkstra import Dijkstra
-from apufunktiot import Apufunktiot
+import apufunktiot
 
 def main():
     """" Ohjelman käyttöliittymä """
-    apufunktiot = Apufunktiot()
     kartta = apufunktiot.alusta_kartta('./test.map')
     alku = (0, 0)
     loppu = (5, 13)

@@ -1,10 +1,10 @@
 import unittest
-from apufunktiot import Apufunktiot
+import apufunktiot
 from dijkstra import Dijkstra
 
 class TestRoute(unittest.TestCase):
     def setUp(self):
-        self.apufunktiot = Apufunktiot()
+        self.apufunktiot = apufunktiot
         self.kartta = ['...', '.@@', '...']
         self.verkko = [[(0, 1), (1, 0)], [(0, 0), (0, 2)], [(0, 1)], [(0, 0), (2, 0)], [],
                        [], [(1, 0), (2, 1)], [(2, 0), (2, 2)], [(2, 1)]]
@@ -20,17 +20,17 @@ class TestRoute(unittest.TestCase):
 
     def test_solmu_ei_ole_verkon_sisalla(self):
         solmu = (6, 6)
-        self.assertFalse(self.apufunktiot._verkon_sisalla(solmu, self.kartta))
+        self.assertFalse(self.apufunktiot.verkon_sisalla(solmu, self.kartta))
 
     def test_solmu_on_verkon_sisalla(self):
         solmu = (0, 2)
-        self.assertTrue(self.apufunktiot._verkon_sisalla(solmu, self.kartta))
+        self.assertTrue(self.apufunktiot.verkon_sisalla(solmu, self.kartta))
 
     def test_solmun_naapuuriin_ei_voi_kulkea(self):
-        self.assertFalse(self.apufunktiot._solmun_naapuriin_voi_kulkea((1, 1), self.kartta))
+        self.assertFalse(self.apufunktiot.solmun_naapuriin_voi_kulkea((1, 1), self.kartta))
 
     def test_solmun_naapuriin_voi_kulkea(self):
-        self.assertTrue(self.apufunktiot._solmun_naapuriin_voi_kulkea((1, 0), self.kartta))
+        self.assertTrue(self.apufunktiot.solmun_naapuriin_voi_kulkea((1, 0), self.kartta))
 
     def test_dijkstra_luo_verkon(self):
         self.assertTrue(self.dijkstra.verkko, self.verkko)
