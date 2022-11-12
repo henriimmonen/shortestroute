@@ -1,12 +1,12 @@
 from collections import deque
 
 class Dijkstra():
-    def __init__(self, alku, loppu, verkko, alustettu_kartta):
+    def __init__(self, alku, loppu, verkko, kartta):
         self.alku = alku
         self.loppu = loppu
         self.verkko = verkko
         self.jono = deque([])
-        self.kartta = alustettu_kartta
+        self.kartta = kartta
         self.kasitellyt = set({})
         self.etaisyys = [[] for i in range(len(self.kartta[0])*len(self.kartta))]
         self.edeltava = [-1 for i in range(len(self.kartta[0])*len(self.kartta))]

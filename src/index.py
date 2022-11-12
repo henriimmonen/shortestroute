@@ -3,7 +3,7 @@ from apumetodit import Apumetodit
 
 def main():
     a = Apumetodit()
-    kartta = a.alusta_kartta()
+    kartta = a.alusta_kartta('./test.map')
     alku = (0,0)
     loppu = (5,13)
     verkko = a.kaarilista(kartta)

@@ -1,9 +1,9 @@
 class Apumetodit():
-    def alusta_kartta(self):
-            f = open('./test.map', 'r')
+    def alusta_kartta(self, osoite):
+            f = open(osoite, 'r')
             kartta = []
             for x in f:
-                if x[0] == '.':
+                if x[0] == '.' or x[0] == '@':
                     kartta.append(x[0:-1])
             f.close()
             return kartta
