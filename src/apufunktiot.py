@@ -7,11 +7,11 @@ def alusta_kartta(osoite):
     Returns:
         matriisi: kartta
     """
-    lukija = open(osoite, 'r')
     kartta = []
-    for rivi in lukija:
-        if rivi[0] == '.' or rivi[0] == '@':
-            kartta.append(rivi[0:-1])
+    with open(osoite, 'r', encoding="utf-8") as lukija:
+        for rivi in lukija:
+            if rivi[0] == '.' or rivi[0] == '@':
+                kartta.append(rivi[0:-1])
     lukija.close()
     return kartta
 
