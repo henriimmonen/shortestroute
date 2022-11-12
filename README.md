@@ -7,3 +7,4 @@ Tiralabrakurssin palautusrepositorio
 
 ## Viikkoraportit
 [Viikko 1](https://github.com/henriimmonen/shortestroute/blob/main/dokumentaatio/viikkoraportti_1.md)
+[Viikko 2](https://github.com/henriimmonen/shortestroute/blob/main/dokumentaatio/viikkoraportti_2.md)
