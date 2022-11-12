@@ -5,13 +5,13 @@ class Dijkstra():
         self.alku = alku
         self.loppu = loppu
         self.verkko = verkko
-        self.jono = deque([])
         self.kartta = kartta
         self.kasitellyt = set({})
         self.etaisyys = [[] for i in range(len(self.kartta[0])*len(self.kartta))]
         self.edeltava = [-1 for i in range(len(self.kartta[0])*len(self.kartta))]
 
     def etsi_reitti(self):
+        self.jono = deque([])
         self.jono.append(self.alku)
         self.kasitellyt.add(self.alku)
         self.etaisyys[self.alku[0]*len(self.kartta[0])+self.alku[1]] = 0
@@ -24,8 +24,10 @@ class Dijkstra():
 
                 self.jono.append(naapuri)
                 self.kasitellyt.add(naapuri)
-                self.etaisyys[naapuri[0]*len(self.kartta[0])+naapuri[1]] = (self.etaisyys[solmu[0]*len(self.kartta[0])+solmu[1]]+1)
-                self.edeltava[naapuri[0]*len(self.kartta[0])+naapuri[1]] = (solmu[0]*len(self.kartta[0])+solmu[1])
+                self.etaisyys[naapuri[0]*len(self.kartta[0])+naapuri[1]] = (
+                    self.etaisyys[solmu[0]*len(self.kartta[0])+solmu[1]]+1)
+                self.edeltava[naapuri[0]*len(self.kartta[0])+naapuri[1]] = (
+                    solmu[0]*len(self.kartta[0])+solmu[1])
         return self.edeltava
 
     def tulosta_reitti(self, etaisyys):
@@ -38,5 +40,6 @@ class Dijkstra():
             edeltava = etaisyys[edeltava]
         reitti_oikein_pain = []
         for i in range(len(reitti)-1, -1, -1):
-            reitti_oikein_pain.append((reitti[i]//len(self.kartta[0]), reitti[i]%len(self.kartta[0])))
+            reitti_oikein_pain.append((reitti[i]//len(self.kartta[0]),
+                                       reitti[i]%len(self.kartta[0])))
         return reitti_oikein_pain
