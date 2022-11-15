@@ -1,4 +1,5 @@
 import unittest
+import math
 import apufunktiot
 from dijkstra import Dijkstra
 
@@ -44,3 +45,11 @@ class TestRoute(unittest.TestCase):
     def test_dijkstra_tulostaa_oikean_reitin(self):
         etaisyys = self.dijkstra.etsi_reitti()
         self.assertEqual(self.dijkstra.tulosta_reitti(etaisyys), [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)])
+
+    def test_laske_etaisyys_toimii_oikein(self):
+        etaisyys = self.dijkstra.laske_etaisyys((0, 1), (0, 2))
+        self.assertEqual(etaisyys, 1)
+
+    def test_laske_etaisyys_toimii_oikein_diagonaalisesti(self):
+        etaisyys = self.dijkstra.laske_etaisyys((0, 1), (1, 2))
+        self.assertEqual(etaisyys, math.sqrt(2))
