@@ -44,10 +44,12 @@ class JumpPointSearch():
 
     def etsi_horisontaalisesti(self):
         for suunta in (-1, 0), (1, 0):
+            pass
 
     def etsi_diagonaalisesti(self):
         for suunta in (-1, -1), (-1, 1), (1, -1), (1, 1):
-            
+            pass
+
     def euklidinen_etaisyys(self, alku, loppu):
         etaisyys = math.sqrt((alku[0]-loppu[0])**2 + (alku[1]-loppu[1])**2)
         return etaisyys
