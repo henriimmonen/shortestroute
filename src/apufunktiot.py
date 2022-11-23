@@ -76,6 +76,6 @@ def solmun_naapuriin_voi_kulkea(naapuri, kartta):
     Returns:
         Boolean-arvo: True, jos annettuun solmuun on kaari, muuten False
     """
-    if kartta[naapuri[0]][naapuri[1]] == '.':
+    if verkon_sisalla(naapuri, kartta) and kartta[naapuri[0]][naapuri[1]] == '.':
         return True
     return False

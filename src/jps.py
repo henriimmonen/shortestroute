@@ -20,23 +20,27 @@ class JumpPointSearch():
             kasiteltava_solmu = heapq.heappop(self.keko)[1]
 
             if self.maalissa(kasiteltava_solmu):
-                self.tulosta_reitti(kasiteltava_solmu)
-                break
+                return self.edeltava
 
             self.etsi_hyppypiste(kasiteltava_solmu)
             self.kasittele_hyppypisteet(kasiteltava_solmu)
 
     def etsi_hyppypiste(self, kasiteltava_solmu):
         self.hyppypisteet = []
+
         if kasiteltava_solmu in self.kasitellyt:
             return
+
         self.kasitellyt.add(kasiteltava_solmu)
 
         naapurit = self.verkko[(kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1])]
         for naapuri in naapurit:
-
             if naapuri in self.kasitellyt:
                 continue
+
+            if self.maalissa(naapuri):
+                self.hyppypisteet.append(naapuri)
+                return
 
             suuntaX = naapuri[0] - kasiteltava_solmu[0]
             suuntaY = naapuri[1] - kasiteltava_solmu[1]
@@ -150,9 +154,9 @@ class JumpPointSearch():
             return True
         return False
 
-    def tulosta_reitti(self, kasiteltava_solmu):
+    def tulosta_reitti(self, edeltavat, kasiteltava_solmu):
         reitti = []
-        while kasiteltava_solmu in self.edeltava:
+        while kasiteltava_solmu in edeltavat:
             reitti.append(kasiteltava_solmu)
             kasiteltava_solmu = self.edeltava[kasiteltava_solmu]
         reitti.append(self.aloitus_solmu)
