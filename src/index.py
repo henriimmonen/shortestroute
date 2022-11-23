@@ -1,7 +1,7 @@
+import time
 from dijkstra import Dijkstra
 from jps import JumpPointSearch
 import apufunktiot
-import time
 
 def main():
     """" Ohjelman käyttöliittymä """
