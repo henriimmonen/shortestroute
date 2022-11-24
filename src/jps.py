@@ -15,6 +15,11 @@ class JumpPointSearch():
         self.edeltava = {}
 
     def hae_reitti(self):
+        """Runko algoritmin toiminnalle
+
+        Returns:
+            sanakirja: Palautetaan sanakirja kuljetuista solmuista
+        """
         heapq.heappush(self.keko, (0, self.aloitus_solmu))
         while len(self.keko) != 0:
             kasiteltava_solmu = heapq.heappop(self.keko)[1]
@@ -26,6 +31,8 @@ class JumpPointSearch():
             self.kasittele_hyppypisteet(kasiteltava_solmu)
 
     def etsi_hyppypiste(self, kasiteltava_solmu):
+        """Annetun solmun naapureista lähdetään etsimään hyppypisteitä
+        """
         self.hyppypisteet = []
 
         if kasiteltava_solmu in self.kasitellyt:
@@ -55,6 +62,8 @@ class JumpPointSearch():
         return
 
     def kasittele_hyppypisteet(self, kasiteltava_solmu):
+        """Kun hyppypisteet on saatu kerättyä, päivitetään kuljettu etäisyys sekä etäisyys maaliin
+        """
         for hyppypiste in self.hyppypisteet:
 
             if hyppypiste in self.kasitellyt:
@@ -69,6 +78,8 @@ class JumpPointSearch():
                 heapq.heappush(self.keko, (self.f[hyppypiste], hyppypiste))
 
     def etsi_horisontaalisesti(self, kasiteltava_solmu, suuntaX, suuntaY):
+        """Etsitään hyppysolmua horisontaalisesti
+        """
         kasiteltava_solmu = (kasiteltava_solmu[0]+suuntaX, kasiteltava_solmu[1]+suuntaY)
 
         if not apufunktiot.verkon_sisalla(kasiteltava_solmu, self.kartta) or not apufunktiot.solmun_naapuriin_voi_kulkea(
@@ -94,6 +105,8 @@ class JumpPointSearch():
         return self.etsi_horisontaalisesti(kasiteltava_solmu, suuntaX, suuntaY) 
 
     def etsi_vertikaalisesti(self, kasiteltava_solmu, suuntaX, suuntaY):
+        """Etsitään hyppysolmua vertikaalisesti
+        """
         kasiteltava_solmu = (kasiteltava_solmu[0]+suuntaX, kasiteltava_solmu[1]+suuntaY)
 
         if not apufunktiot.verkon_sisalla(kasiteltava_solmu, self.kartta) or not apufunktiot.solmun_naapuriin_voi_kulkea(
@@ -119,6 +132,8 @@ class JumpPointSearch():
         return self.etsi_vertikaalisesti(kasiteltava_solmu, suuntaX, suuntaY)
 
     def etsi_diagonaalisesti(self, kasiteltava_solmu, suuntaX, suuntaY):
+        """Etsitään hyppysolmua diagonaalisesti
+        """
         kasiteltava_solmu = (kasiteltava_solmu[0]+suuntaX, kasiteltava_solmu[1]+suuntaY)
 
         if not apufunktiot.verkon_sisalla(kasiteltava_solmu, self.kartta) or not apufunktiot.solmun_naapuriin_voi_kulkea(
@@ -146,19 +161,35 @@ class JumpPointSearch():
         return self.etsi_diagonaalisesti(kasiteltava_solmu, suuntaX, suuntaY)
 
     def euklidinen_etaisyys(self, alku, loppu):
+        """Lasketaan kahden koordinaatin välinen euklidinen etäisyys
+        """
         etaisyys = math.sqrt((alku[0]-loppu[0])**2 + (alku[1]-loppu[1])**2)
         return etaisyys
 
     def maalissa(self, kasiteltava_solmu):
+        """Tarkistetaan ollaanko päästy määritettyyn maalisolmuun
+
+        Args:
+            kasiteltava_solmu: käsittelyssä oleva solmu tuple-muodossa
+
+        Returns:
+            Boolean-arvo: True jos ollaan maalissa, muuten False
+        """
         if kasiteltava_solmu[0] == self.lopetus_solmu[0] and kasiteltava_solmu[1] == self.lopetus_solmu[1]:
             return True
         return False
 
     def tulosta_reitti(self, edeltavat, kasiteltava_solmu):
+        """Tulostetaan kuljettu reitti
+
+        Args:
+            edeltavat: sanakirja kuljetuista solmuista
+            kasiteltava_solmu: käsittelyssä oleva solmu
+        """
         reitti = []
         while kasiteltava_solmu in edeltavat:
             reitti.append(kasiteltava_solmu)
             kasiteltava_solmu = self.edeltava[kasiteltava_solmu]
         reitti.append(self.aloitus_solmu)
         reitti = reitti[::-1]
-        print(reitti)
+        return reitti

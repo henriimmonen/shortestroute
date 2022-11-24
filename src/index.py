@@ -27,7 +27,7 @@ def main():
     print('JPS-algoritmin tulos')
     print('*******************************')
     edeltavat = jps.hae_reitti()
-    jps.tulosta_reitti(edeltavat, loppu)
+    print(jps.tulosta_reitti(edeltavat, loppu))
     loppuaika_jps = time.time()
     print('Algoritmi suoriutui ajassa: ', loppuaika_jps - alkuaika_jps)
     print('\n')

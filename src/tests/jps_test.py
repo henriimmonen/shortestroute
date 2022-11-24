@@ -18,3 +18,10 @@ class TestRoute(unittest.TestCase):
     def test_jps_hakee_oikean_reitin(self):
         edeltavat = self.jps.hae_reitti()
         self.assertEqual(edeltavat.get((2, 2)), (2, 1))
+
+    def test_etsittaessa_horisontaalisesti_tunnistetaan_kun_ollaan_maalissa(self):
+        self.assertTrue(self.jps.etsi_horisontaalisesti((2, 1), 0, 1))
+
+    def test_reitin_tulostus(self):
+        edeltavat = self.jps.hae_reitti()
+        self.assertEqual(self.jps.tulosta_reitti(edeltavat, (2, 2)), [(0, 0), (1, 0), (2, 1), (2, 2)])
