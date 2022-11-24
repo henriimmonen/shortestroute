@@ -14,22 +14,21 @@ class Dijkstra(): # pylint: disable=too-many-instance-attributes
         self.edeltava = [-1 for i in range(len(self.kartta[0])*len(self.kartta))]
 
     def etsi_reitti(self):
-        """Etsitään lyhyin reitti leveyshaulla
+        """Etsitään lyhyin reitti
 
         Returns:
             self.edeltava: lista jokaista solmua edeltäneestä solmusta
         """
         heapq.heappush(self.keko, self.alku)
-        self.kasitellyt.add(self.alku)
         self.etaisyys[self.alku[0]*len(self.kartta[0])+self.alku[1]] = 0
         while len(self.keko) > 0:
             solmu = heapq.heappop(self.keko)
+            if solmu in self.kasitellyt:
+                continue
             self.kasitellyt.add(solmu)
             if solmu[0] == self.loppu[0] and solmu[1] == self.loppu[1]:
                 break
             for naapuri in self.verkko[(solmu[0]*len(self.kartta[0])+solmu[1])]:
-                if naapuri in self.kasitellyt:
-                    continue
                 heapq.heappush(self.keko, naapuri)
                 etaisyys_naapuriin = self.laske_etaisyys(solmu, naapuri)
                 if self.etaisyys[naapuri[0]*len(self.kartta[0])+naapuri[1]] > self.etaisyys[

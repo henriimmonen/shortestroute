@@ -7,7 +7,7 @@ def main():
     """" Ohjelman käyttöliittymä """
     kartta = apufunktiot.alusta_kartta('./test.map')
     alku = (0, 0)
-    loppu = (5, 13)
+    loppu = (8, 30)
     verkko = apufunktiot.kaarilista(kartta)
     print('\n')
     print('Dijkstran algoritmin ja Jump Point Search-algoritmin vertailu\n')
