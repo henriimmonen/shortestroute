@@ -1,6 +1,6 @@
 # Testausdokumentti
 ## Kattavuusraportti yksikkötesteistä
-![testikattavuus](https://github.com/henriimmonen/shortestroute/blob/main/dokumentaatio/kuvat/coverage.png)
+![testikattavuus](https://github.com/henriimmonen/shortestroute/blob/main/dokumentaatio/kuvat/testikattavuus.png)
 
 ### Dijkstran algoritmi
 Tällä hetkellä Dijkstran toiminta tapahtuu muutamassa eri funktiossa. Näitä voisi kuitenkin refaktoroida kattavampaa testausta ajatellen. Algoritmia kirjoittaessa testausta on suoritettu pääasiallisesti manuaalisesti, mutta ohjelman laajentamista ajatellen testausta (erityisesti reitin pituuteen ja sen vastaavuuteen jps:n tuottaman reitin kanssa) tulisi automatisoida.  
