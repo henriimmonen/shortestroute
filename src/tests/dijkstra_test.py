@@ -29,3 +29,12 @@ class TestRoute(unittest.TestCase):
     def test_laske_etaisyys_toimii_oikein_diagonaalisesti(self):
         etaisyys = self.dijkstra.laske_etaisyys((0, 1), (1, 2))
         self.assertEqual(etaisyys, math.sqrt(2))
+
+    def test_euklidinen_etaisyys_toimii_oikein(self):
+        self.assertEqual(self.dijkstra.euklidinen_etaisyys((0, 0), (2, 2)), 2*math.sqrt(2))
+
+    def test_maalissa_tunnistaa_maaliruudun(self):
+        self.assertTrue(self.dijkstra.maalissa((2, 2)))
+
+    def test_maalissa_tunnistaa_kun_ei_olla_maalissa(self):
+        self.assertFalse(self.dijkstra.maalissa((1, 1)))
