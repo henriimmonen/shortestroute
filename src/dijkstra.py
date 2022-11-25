@@ -12,7 +12,8 @@ class Dijkstra(): # pylint: disable=too-many-instance-attributes
         inf = 10**9
         self.etaisyys = [inf for i in range(len(self.kartta[0])*len(self.kartta))]
         self.edeltava = [-1 for i in range(len(self.kartta[0])*len(self.kartta))]
-        self.f = {self.aloitus_solmu: self.euklidinen_etaisyys(self.aloitus_solmu, self.lopetus_solmu)}
+        self.etaisyys_maaliin = {self.aloitus_solmu: self.euklidinen_etaisyys(self.aloitus_solmu,
+            self.lopetus_solmu)}
 
     def etsi_reitti(self):
         """Etsitään lyhyin reitti
@@ -20,7 +21,7 @@ class Dijkstra(): # pylint: disable=too-many-instance-attributes
         Returns:
             self.edeltava: Lista jokaista solmua edeltäneestä solmusta
         """
-        heapq.heappush(self.keko, (self.f[self.aloitus_solmu], self.aloitus_solmu))
+        heapq.heappush(self.keko, (self.etaisyys_maaliin[self.aloitus_solmu], self.aloitus_solmu))
         self.etaisyys[self.aloitus_solmu[0]*len(self.kartta[0])+self.aloitus_solmu[1]] = 0
 
         while len(self.keko) > 0:
@@ -34,21 +35,27 @@ class Dijkstra(): # pylint: disable=too-many-instance-attributes
             if self.maalissa(kasiteltava_solmu):
                 break
 
-            for naapuri in self.verkko[(kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1])]:
+            for naapuri in self.verkko[
+                    (kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1])
+                    ]:
                 etaisyys_naapuriin = self.laske_etaisyys(kasiteltava_solmu, naapuri)
 
                 if self.etaisyys[naapuri[0]*len(self.kartta[0])+naapuri[1]] > self.etaisyys[
-                    kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1]] + etaisyys_naapuriin:
+                    kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1]
+                    ] + etaisyys_naapuriin:
 
                     self.etaisyys[naapuri[0]*len(self.kartta[0])+naapuri[1]] = self.etaisyys[
-                        kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1]] + etaisyys_naapuriin
+                        kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1]
+                        ] + etaisyys_naapuriin
 
                     self.edeltava[naapuri[0]*len(self.kartta[0])+naapuri[1]] = (
                     kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1])
 
-                self.f[naapuri] = self.etaisyys[naapuri[0]*len(self.kartta[0])+naapuri[1]] + self.euklidinen_etaisyys(naapuri,
+                self.etaisyys_maaliin[naapuri] = self.etaisyys[
+                        naapuri[0]*len(self.kartta[0])+naapuri[1]
+                        ] + self.euklidinen_etaisyys(naapuri,
                     self.lopetus_solmu)
-                heapq.heappush(self.keko, (self.f[naapuri], naapuri))
+                heapq.heappush(self.keko, (self.etaisyys_maaliin[naapuri], naapuri))
         return self.edeltava
 
     def laske_etaisyys(self, solmu, naapuri):
@@ -90,8 +97,9 @@ class Dijkstra(): # pylint: disable=too-many-instance-attributes
         Returns:
            Boolean-arvo: True jos maalissa, muuten False
         """
-        if kasiteltava_solmu[0] == self.lopetus_solmu[0] and kasiteltava_solmu[1] == self.lopetus_solmu[1]:
-            return True
+        if kasiteltava_solmu[0] == self.lopetus_solmu[0]:
+            if kasiteltava_solmu[1] == self.lopetus_solmu[1]:
+                return True
         return False
 
     def euklidinen_etaisyys(self, alku, loppu):
