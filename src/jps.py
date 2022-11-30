@@ -42,7 +42,16 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
 
         self.kasitellyt.add(kasiteltava_solmu)
 
-        naapurit = self.verkko[(kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1])]
+        if kasiteltava_solmu == self.aloitus_solmu:
+            naapurit = self.verkko[(
+                kasiteltava_solmu[0]*len(
+                    self.kartta[0]
+                    )+kasiteltava_solmu[1]
+                    )]
+        else:
+            naapurit = self.karsi_naapurit(kasiteltava_solmu)
+
+        print('Käsitellään solmua/naapurit:', kasiteltava_solmu, naapurit)
         for naapuri in naapurit:
             if naapuri in self.kasitellyt:
                 continue
@@ -217,6 +226,39 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
             if kasiteltava_solmu[1] == self.lopetus_solmu[1]:
                 return True
         return False
+
+    def karsi_naapurit(self, kasiteltava_solmu):
+        edeltava_solmu = self.edeltava[kasiteltava_solmu]
+        print('Käsiteltävä solmu, edeltävä solmu:', kasiteltava_solmu, edeltava_solmu)
+
+        suunta_x = kasiteltava_solmu[0] - edeltava_solmu[0]
+        suunta_y = kasiteltava_solmu[1] - edeltava_solmu[1]
+
+        if suunta_x == 0 or suunta_y == 0:
+            if suunta_x == 0:
+                if suunta_y > 0:
+                    suunta_y = 1
+                else:
+                    suunta_y = -1
+            if suunta_y == 0:
+                if suunta_x > 0:
+                    suunta_x = 1
+                else:
+                    suunta_x = -1
+            return [(kasiteltava_solmu[0]+suunta_x, kasiteltava_solmu[1]+suunta_y)]
+
+        if suunta_x != 0 and suunta_y != 0:
+            if suunta_x > 0:
+                suunta_x = 1
+            if suunta_x < 0:
+                suunta_x = -1
+            if suunta_y > 0:
+                suunta_y = 1
+            if suunta_y < 0:
+                suunta_y = -1
+            return [(kasiteltava_solmu[0]+suunta_x, kasiteltava_solmu[1]+suunta_y),
+                    (kasiteltava_solmu[0]+suunta_x, kasiteltava_solmu[1]),
+                    (kasiteltava_solmu[0], kasiteltava_solmu[1]+suunta_y)]
 
     def tulosta_reitti(self, edeltavat, kasiteltava_solmu):
         """Tulostetaan kuljettu reitti

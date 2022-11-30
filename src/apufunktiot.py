@@ -79,3 +79,18 @@ def solmun_naapuriin_voi_kulkea(naapuri, kartta):
     if verkon_sisalla(naapuri, kartta) and kartta[naapuri[0]][naapuri[1]] == '.':
         return True
     return False
+
+def piirra_kartalle(alkuperainen_kartta, kuljettu_reitti):
+    for rivi in range(len(alkuperainen_kartta)):
+        for sarake in range(len(alkuperainen_kartta[0])):
+            if (rivi, sarake) in kuljettu_reitti:
+                alkuperainen_kartta[rivi] = vaihda_merkki(sarake, alkuperainen_kartta[rivi])
+    return alkuperainen_kartta
+
+def vaihda_merkki(sarake, kartan_rivi):
+    sarakkeen_loppu = sarake+1
+    if sarake+1 >= len(kartan_rivi):
+        sarakkeen_loppu = sarake
+
+    uusi_rivi = kartan_rivi[:sarake] + '*' + kartan_rivi[sarakkeen_loppu:]
+    return uusi_rivi
