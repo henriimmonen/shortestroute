@@ -2,10 +2,10 @@ def alusta_kartta(osoite):
     """Alustetaan matriisikartta tiedostosta
 
     Args:
-        osoite: suhteellinen osoite, josta karttatiedosto luetaan
+        osoite: Suhteellinen osoite, josta karttatiedosto luetaan
 
     Returns:
-        matriisi: kartta
+        kartta: Matriisikartta
     """
     kartta = []
     with open(osoite, 'r', encoding="utf-8") as lukija:
@@ -19,10 +19,10 @@ def kaarilista(kartta):
     """Luodaan kaarilista annetusta karttapohjasta
 
     Args:
-        kartta: matriisikartta
+        kartta: Matriisikartta
 
     Returns:
-        verkko: kaarilista
+        verkko: Kaarilista
     """
     verkko = []
     for rivi in enumerate(kartta):
@@ -35,8 +35,8 @@ def tarkista_naapurit(solmu, kartta):
     """Tarkistetaan annetun solmun kaaret
 
     Args:
-        solmu: tuple-muotoinen koordinaatti
-        kartta : matriisikartta
+        solmu: Tuple-muotoinen koordinaatti
+        kartta : Matriisikartta
 
     Returns:
         solmun_naapurit: lista solmun kaarista
@@ -55,8 +55,8 @@ def verkon_sisalla(solmu, kartta):
     """Tarkistetaan onko annettu solmu matriisin sisällä
 
     Args:
-        solmu: tuple-muotoinen koordinaatti
-        kartta: matriisikartta
+        solmu: Tuple-muotoinen koordinaatti
+        kartta: Matriisikartta
 
     Returns:
         Boolean-arvo: True, jos solmu on matriisin sisällä, muuten False
@@ -70,8 +70,8 @@ def solmun_naapuriin_voi_kulkea(naapuri, kartta):
     """Tarkistetaan onko annettuun solmuun kaarta
 
     Args:
-        naapuri: tuple-muotoinen koordinaatti
-        kartta: matriisikartta
+        naapuri: Tuple-muotoinen koordinaatti
+        kartta: Matriisikartta
 
     Returns:
         Boolean-arvo: True, jos annettuun solmuun on kaari, muuten False
@@ -81,13 +81,33 @@ def solmun_naapuriin_voi_kulkea(naapuri, kartta):
     return False
 
 def piirra_kartalle(alkuperainen_kartta, kuljettu_reitti):
-    for rivi in range(len(alkuperainen_kartta)):
-        for sarake in range(len(alkuperainen_kartta[0])):
-            if (rivi, sarake) in kuljettu_reitti:
-                alkuperainen_kartta[rivi] = vaihda_merkki(sarake, alkuperainen_kartta[rivi])
+    """Pääfunktio kuljetun reitin piirtämiseksi kartalle
+
+    Args:
+        alkuperainen_kartta: _description_
+        kuljettu_reitti: Lista kuljetuista solmuista
+
+    Returns:
+        alkuperainen_kartta: Palautetaan muokattu versio kartasta
+    """
+    for rivi in enumerate(alkuperainen_kartta):
+        for sarake in enumerate(alkuperainen_kartta[rivi[0]]):
+            if (rivi[0], sarake[0]) in kuljettu_reitti:
+                alkuperainen_kartta[rivi[0]] = vaihda_merkki(
+                    sarake[0], alkuperainen_kartta[rivi[0]]
+                    )
     return alkuperainen_kartta
 
 def vaihda_merkki(sarake, kartan_rivi):
+    """Vaihdetaan kartasta kuljetun reitin paikalle '*' merkki
+
+    Args:
+        sarake: Sarakkeen indeksi, josta merkki vaihdetaan
+        kartan_rivi: Kartan rivi str-muodossa
+
+    Returns:
+        uusi_rivi: Palauttaa muokatun rivin
+    """
     sarakkeen_loppu = sarake+1
     if sarake+1 >= len(kartan_rivi):
         sarakkeen_loppu = sarake

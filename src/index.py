@@ -26,7 +26,7 @@ def main():
     #kuljettu_reitti = apufunktiot.piirra_kartalle(kartta, reitti_dijkstra)
     #for i in kuljettu_reitti:
     #    print(i)
-    #print('\n')
+    print('\n')
 
     alkuaika_jps = time.time()
     jps = JumpPointSearch(alku, loppu, verkko, kartta)

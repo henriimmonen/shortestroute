@@ -250,6 +250,7 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
             return [(kasiteltava_solmu[0]+suunta_x, kasiteltava_solmu[1]+suunta_y),
                     (kasiteltava_solmu[0]+suunta_x, kasiteltava_solmu[1]),
                     (kasiteltava_solmu[0], kasiteltava_solmu[1]+suunta_y)]
+        return []
 
     def tulosta_reitti(self, edeltavat, kasiteltava_solmu):
         """Tulostetaan kuljettu reitti
