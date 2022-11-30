@@ -51,7 +51,6 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
         else:
             naapurit = self.karsi_naapurit(kasiteltava_solmu)
 
-        print('Käsitellään solmua/naapurit:', kasiteltava_solmu, naapurit)
         for naapuri in naapurit:
             if naapuri in self.kasitellyt:
                 continue
@@ -62,7 +61,6 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
 
             suunta_x = naapuri[0] - kasiteltava_solmu[0]
             suunta_y = naapuri[1] - kasiteltava_solmu[1]
-
 
             if suunta_x == 0 and suunta_y != 0:
                 self.etsi_horisontaalisesti(kasiteltava_solmu, suunta_x, suunta_y)
@@ -105,32 +103,25 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
             return False
 
         if self.maalissa(kasiteltava_solmu):
-            self.hyppypisteet.append(kasiteltava_solmu)
             return True
 
-        if apufunktiot.verkon_sisalla((
+        if not apufunktiot.solmun_naapuriin_voi_kulkea((
                 kasiteltava_solmu[0]-1, kasiteltava_solmu[1]
                 ), self.kartta):
-            if not apufunktiot.solmun_naapuriin_voi_kulkea((
-                    kasiteltava_solmu[0]-1, kasiteltava_solmu[1]
+            if apufunktiot.solmun_naapuriin_voi_kulkea((
+                    kasiteltava_solmu[0]-1, kasiteltava_solmu[1]+suunta_y
                     ), self.kartta):
-                if apufunktiot.solmun_naapuriin_voi_kulkea((
-                        kasiteltava_solmu[0]-1, kasiteltava_solmu[1]+suunta_y
-                        ), self.kartta):
-                    self.hyppypisteet.append(kasiteltava_solmu)
-                    return True
+                self.hyppypisteet.append(kasiteltava_solmu)
+                return True
 
-        if apufunktiot.verkon_sisalla((
+        if not apufunktiot.solmun_naapuriin_voi_kulkea((
                 kasiteltava_solmu[0]+1, kasiteltava_solmu[1]
                 ), self.kartta):
-            if not apufunktiot.solmun_naapuriin_voi_kulkea((
-                    kasiteltava_solmu[0]+1, kasiteltava_solmu[1]
+            if apufunktiot.solmun_naapuriin_voi_kulkea((
+                    kasiteltava_solmu[0]+1, kasiteltava_solmu[1]+suunta_y
                     ), self.kartta):
-                if apufunktiot.solmun_naapuriin_voi_kulkea((
-                        kasiteltava_solmu[0]+1, kasiteltava_solmu[1]+suunta_y
-                        ), self.kartta):
-                    self.hyppypisteet.append(kasiteltava_solmu)
-                    return True
+                self.hyppypisteet.append(kasiteltava_solmu)
+                return True
 
         return self.etsi_horisontaalisesti(kasiteltava_solmu, suunta_x, suunta_y)
 
@@ -146,32 +137,25 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
             return False
 
         if self.maalissa(kasiteltava_solmu):
-            self.hyppypisteet.append(kasiteltava_solmu)
             return True
 
-        if apufunktiot.verkon_sisalla((
+        if not apufunktiot.solmun_naapuriin_voi_kulkea((
                 kasiteltava_solmu[0], kasiteltava_solmu[1]+1
                 ), self.kartta):
-            if not apufunktiot.solmun_naapuriin_voi_kulkea((
-                    kasiteltava_solmu[0], kasiteltava_solmu[1]+1
+            if apufunktiot.solmun_naapuriin_voi_kulkea((
+                    kasiteltava_solmu[0]+suunta_x, kasiteltava_solmu[1]+1
                     ), self.kartta):
-                if apufunktiot.solmun_naapuriin_voi_kulkea((
-                        kasiteltava_solmu[0]+suunta_x, kasiteltava_solmu[1]+1
-                        ), self.kartta):
-                    self.hyppypisteet.append(kasiteltava_solmu)
-                    return True
+                self.hyppypisteet.append(kasiteltava_solmu)
+                return True
 
-        if apufunktiot.verkon_sisalla((
+        if not apufunktiot.solmun_naapuriin_voi_kulkea((
                 kasiteltava_solmu[0], kasiteltava_solmu[1]-1
                 ), self.kartta):
-            if not apufunktiot.solmun_naapuriin_voi_kulkea((
-                    kasiteltava_solmu[0], kasiteltava_solmu[1]-1
+            if apufunktiot.solmun_naapuriin_voi_kulkea((
+                    kasiteltava_solmu[0]+suunta_x, kasiteltava_solmu[1]-1
                     ), self.kartta):
-                if apufunktiot.solmun_naapuriin_voi_kulkea((
-                        kasiteltava_solmu[0]+suunta_x, kasiteltava_solmu[1]-1
-                        ), self.kartta):
-                    self.hyppypisteet.append(kasiteltava_solmu)
-                    return True
+                self.hyppypisteet.append(kasiteltava_solmu)
+                return True
 
         return self.etsi_vertikaalisesti(kasiteltava_solmu, suunta_x, suunta_y)
 
@@ -188,7 +172,6 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
             return False
 
         if self.maalissa(kasiteltava_solmu):
-            self.hyppypisteet.append(kasiteltava_solmu)
             return True
 
         if len(self.verkko[(kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1])]) < 8:
@@ -217,7 +200,7 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
         """Tarkistetaan ollaanko päästy määritettyyn maalisolmuun
 
         Args:
-            kasiteltava_solmu: käsittelyssä oleva solmu tuple-muodossa
+            kasiteltava_solmu: Käsittelyssä oleva solmu tuple-muodossa
 
         Returns:
             Boolean-arvo: True jos ollaan maalissa, muuten False
@@ -228,8 +211,16 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
         return False
 
     def karsi_naapurit(self, kasiteltava_solmu):
+        """Karsitaan solmun naapureista jps-algoritmin sääntöjen mukaisesti
+        jatkosolmut
+
+        Args:
+            kasiteltava_solmu: Käsittelyssä oleva solmu tuple-muodossa
+
+        Returns:
+            list: Lista naapurisolmuista
+        """
         edeltava_solmu = self.edeltava[kasiteltava_solmu]
-        print('Käsiteltävä solmu, edeltävä solmu:', kasiteltava_solmu, edeltava_solmu)
 
         suunta_x = kasiteltava_solmu[0] - edeltava_solmu[0]
         suunta_y = kasiteltava_solmu[1] - edeltava_solmu[1]
