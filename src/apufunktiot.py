@@ -114,3 +114,48 @@ def vaihda_merkki(sarake, kartan_rivi):
 
     uusi_rivi = kartan_rivi[:sarake] + '*' + kartan_rivi[sarakkeen_loppu:]
     return uusi_rivi
+
+def laske_puuttuvat_solmut(alku_solmu, loppu_solmu):
+    """Lasketaan kahden hyppypisteen väliset solmut
+
+    Args:
+        alku_solmu: Hypyn lähtösolmu
+        loppu_solmu: Hypyn päätesolmu
+
+    Returns:
+        puuttuvat_solmut: Lista puuttuvista solmuista
+    """
+    puuttuvat_solmut = []
+    erotus_x = alku_solmu[0] - loppu_solmu[0]
+    erotus_y = alku_solmu[1] - loppu_solmu[1]
+
+    if erotus_x != 0:
+        erotus_x = erotus_x // abs(erotus_x)
+
+    if erotus_y != 0:
+        erotus_y = erotus_y // abs(erotus_y)
+    rivi = loppu_solmu[0]
+    sarake = loppu_solmu[1]
+
+    while (rivi, sarake) != alku_solmu:
+        rivi += erotus_x
+        sarake += erotus_y
+        if (rivi, sarake) != alku_solmu:
+            puuttuvat_solmut.append((rivi, sarake))
+    puuttuvat_solmut = sorted(puuttuvat_solmut)
+    return puuttuvat_solmut
+
+def puuttuu_solmuja(alku_solmu, loppu_solmu):
+    """Tarkistetaan onko kahden solmun välissä ohitettuja solmuja
+
+    Args:
+        alku_solmu: Hypyn lähtösolmu
+        loppu_solmu: Hypyn päätesolmu
+
+    Returns:
+        Boolean-arvo: True jos solmuja puuttuu, muuten False
+    """
+    if abs(alku_solmu[0] - loppu_solmu[0]) >= 2 or abs(
+        alku_solmu[1] - loppu_solmu[1]) >= 2:
+        return True
+    return False

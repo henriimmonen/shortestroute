@@ -3,7 +3,7 @@ from dijkstra import Dijkstra
 from jps import JumpPointSearch
 import apufunktiot
 
-def main():
+def main(): # pylint: disable=too-many-locals
     """" Ohjelman käyttöliittymä """
     kartta = apufunktiot.alusta_kartta('./test.map')
     alku = (0, 0)
@@ -11,7 +11,6 @@ def main():
     verkko = apufunktiot.kaarilista(kartta)
     print('\n')
     print('Dijkstran algoritmin ja Jump Point Search-algoritmin vertailu\n')
-
     alkuaika_dijkstra = time.time()
     print('Dijkstran algoritmin tulos')
     print('*******************************')
@@ -23,19 +22,30 @@ def main():
     print('Algoritmi suoriutui ajassa: ', loppuaika_dijkstra-alkuaika_dijkstra)
     print('\n')
     print('Dijkstran reitti:')
-    #kuljettu_reitti = apufunktiot.piirra_kartalle(kartta, reitti_dijkstra)
-    #for i in kuljettu_reitti:
-    #    print(i)
+    kuljettu_reitti = apufunktiot.piirra_kartalle(kartta, reitti_dijkstra)
+    for i in kuljettu_reitti:
+        print(i)
     print('\n')
 
+    kartta = apufunktiot.alusta_kartta('./test.map')
+    verkko = apufunktiot.kaarilista(kartta)
     alkuaika_jps = time.time()
     jps = JumpPointSearch(alku, loppu, verkko, kartta)
     print('JPS-algoritmin tulos')
     print('*******************************')
     edeltavat = jps.hae_reitti()
-    print(jps.tulosta_reitti(edeltavat, loppu))
+    reitti_jps = jps.tulosta_reitti(edeltavat, loppu)
+    print(reitti_jps)
     loppuaika_jps = time.time()
     print('Algoritmi suoriutui ajassa: ', loppuaika_jps - alkuaika_jps)
+    print('\n')
+    print('JPS:n reitti:')
+    for i in range(len(reitti_jps)-1):
+        if apufunktiot.puuttuu_solmuja(reitti_jps[i], reitti_jps[i+1]):
+            reitti_jps.insert(i, apufunktiot.laske_puuttuvat_solmut(reitti_jps[i], reitti_jps[i+1]))
+    kuljettu_reitti = apufunktiot.piirra_kartalle(kartta, reitti_jps)
+    for i in kuljettu_reitti:
+        print(i)
     print('\n')
 
 if __name__ == '__main__':
