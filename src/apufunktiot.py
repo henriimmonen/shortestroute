@@ -110,9 +110,9 @@ def vaihda_merkki(sarake, kartan_rivi):
     """
     sarakkeen_loppu = sarake+1
     if sarake+1 >= len(kartan_rivi):
-        sarakkeen_loppu = sarake
-
-    uusi_rivi = kartan_rivi[:sarake] + '*' + kartan_rivi[sarakkeen_loppu:]
+        uusi_rivi = kartan_rivi[:sarake] + '*'
+    else:
+        uusi_rivi = kartan_rivi[:sarake] + '*' + kartan_rivi[sarakkeen_loppu:]
     return uusi_rivi
 
 def laske_puuttuvat_solmut(alku_solmu, loppu_solmu):
