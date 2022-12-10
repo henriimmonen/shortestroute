@@ -46,12 +46,12 @@ class TestRoute(unittest.TestCase):
 
     def test_laske_puuttuvat_solmut_horisontaalisesti_oikein(self):
         puuttuvat_solmut = self.apufunktiot.laske_puuttuvat_solmut((0, 0), (0, 5))
-        self.assertEqual(puuttuvat_solmut, [(0, 1), (0, 2), (0, 3), (0, 4)])
+        self.assertEqual(sorted(puuttuvat_solmut), [(0, 1), (0, 2), (0, 3), (0, 4)])
 
     def test_laske_puuttuvat_solmut_vertikaalisesti_oikein(self):
         puuttuvat_solmut = self.apufunktiot.laske_puuttuvat_solmut((0, 0), (5, 0))
-        self.assertEqual(puuttuvat_solmut, [(1, 0), (2, 0), (3, 0), (4, 0)])
+        self.assertEqual(sorted(puuttuvat_solmut), [(1, 0), (2, 0), (3, 0), (4, 0)])
 
     def test_laske_puuttuvat_solmut_diagonaalisesti_oikein(self):
         puuttuvat_solmut = self.apufunktiot.laske_puuttuvat_solmut((0, 0), (5, 5))
-        self.assertEqual(puuttuvat_solmut, [(1, 1), (2, 2), (3, 3), (4, 4)])
+        self.assertEqual(sorted(puuttuvat_solmut), [(1, 1), (2, 2), (3, 3), (4, 4)])
