@@ -11,6 +11,7 @@ class Ui:
         self.kartta = None
 
     def kysy_aloitus_lopetus(self):
+        """Kysytään aloitus- ja lopetus-solmut"""
         self.kartta = apufunktiot.alusta_kartta('./test.map')
         print('\n')
         print('***Kartta***')
@@ -82,6 +83,7 @@ class Ui:
         print('\n')
 
     def tarkista_rivi_ja_sarake(self, rivi, sarake):
+        """Tarkistetaan annettujen solmujen kuuluminen kartan sisälle"""
         if rivi >= len(self.kartta) or rivi < 0:
             print('Rivinumeroa ei hyväksytty, anna välillä 0 -', len(self.kartta)-1)
             return False
