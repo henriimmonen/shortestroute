@@ -1,4 +1,5 @@
 import time
+import os
 from dijkstra import Dijkstra
 from jps import JumpPointSearch
 import apufunktiot
@@ -9,15 +10,24 @@ class Ui:
         self.aloitus_solmu = None
         self.lopetus_solmu = None
         self.kartta = None
+        self.kartan_nimi = None
+        self.kartta_liian_suuri = False
 
     def kysy_aloitus_lopetus(self):
         """Kysytään aloitus- ja lopetus-solmut"""
-        self.kartta = apufunktiot.alusta_kartta('./test.map')
-        print('\n')
-        print('***Kartta***')
-        for rivi in self.kartta:
-            print(rivi)
-        print('\n')
+        self.kartan_nimi = input('Anna karttatiedoston nimi: ')
+        self.kartta = apufunktiot.alusta_kartta(f'./{self.kartan_nimi}')
+        self.kirjoita_tiedostoon('sydney', self.kartta)
+        self.tarkista_kartan_koko()
+
+        if self.kartta_liian_suuri == True:
+            self.avaa_kartta(self.kartan_nimi)
+        else:
+            print('\n')
+            print('***Kartta***')
+            for rivi in self.kartta:
+                print(rivi)
+            print('\n')
 
         aloitus_solmu_x = int(input(
             f'Anna aloitus-solmun rivi väliltä 0 - {len(self.kartta)-1}: '
@@ -70,11 +80,15 @@ class Ui:
         print('\n')
         print('Dijkstran reitti:')
         kuljettu_reitti = apufunktiot.piirra_kartalle(self.kartta, reitti_dijkstra)
-        for i in kuljettu_reitti:
-            print(i)
-        print('\n')
+        if self.kartta_liian_suuri == True:
+            self.kirjoita_tiedostoon('dijkstra', kuljettu_reitti)
+            self.avaa_kartta('dijkstra.txt')
+        else:
+            for i in kuljettu_reitti:
+                print(i)
+            print('\n')
 
-        self.kartta = apufunktiot.alusta_kartta('./test.map')
+        self.kartta = apufunktiot.alusta_kartta(f'./{self.kartan_nimi}')
         verkko = apufunktiot.kaarilista(self.kartta)
         alkuaika_jps = time.time()
         jps = JumpPointSearch(self.aloitus_solmu, self.lopetus_solmu, verkko, self.kartta)
@@ -94,9 +108,13 @@ class Ui:
                     reitti_jps[i], reitti_jps[i+1])
         reitti_jps = reitti_jps + lisattavat
         kuljettu_reitti = apufunktiot.piirra_kartalle(self.kartta, reitti_jps)
-        for i in kuljettu_reitti:
-            print(i)
-        print('\n')
+        if self.kartta_liian_suuri == True:
+            self.kirjoita_tiedostoon('jps', kuljettu_reitti)
+            self.avaa_kartta('jps.txt')
+        else:
+            for i in kuljettu_reitti:
+                print(i)
+            print('\n')
 
     def tarkista_rivi_ja_sarake(self, rivi, sarake):
         """Tarkistetaan annettujen solmujen kuuluminen kartan sisälle"""
@@ -108,4 +126,26 @@ class Ui:
             print('Sarakenumeroa ei hyväksytty, anna välillä 0 -', len(self.kartta[0])-1)
             return False
 
+        if self.kartta[rivi][sarake] == '@':
+            print('Valittu solmu on seinäsolmu, valitse jokin toinen solmu')
+            return False
+
         return True
+
+    def tarkista_kartan_koko(self):
+        """Tarkistetaan voidaanko kartta näyttää komentorivillä"""
+        if len(self.kartta[0]) > 30:
+            self.kartta_liian_suuri = True
+        return
+
+    def avaa_kartta(self, kartta):
+        """Avataan kartta tekstieditorissa"""
+        os.system(f'gio open ./{kartta}')
+
+    def kirjoita_tiedostoon(self, algoritmi, kartta):
+        """Kirjoitetaan kartta tekstitiedostoksi näyttämistä varten"""
+        f = open(f'{algoritmi}.txt', 'w')
+        for rivi in kartta:
+            f.write(rivi)
+            f.write('\n')
+        f.close()
