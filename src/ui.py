@@ -19,21 +19,37 @@ class Ui:
             print(rivi)
         print('\n')
 
-        aloitus_solmu_x = int(input(f'Anna aloitus-solmun rivi väliltä 0 - {len(self.kartta)-1}: '))
-        aloitus_solmu_y = int(input(f'Anna aloitus-solmun sarake väliltä 0 - {len(self.kartta[0])-1}: '))
+        aloitus_solmu_x = int(input(
+            f'Anna aloitus-solmun rivi väliltä 0 - {len(self.kartta)-1}: '
+            ))
+        aloitus_solmu_y = int(input(
+            f'Anna aloitus-solmun sarake väliltä 0 - {len(self.kartta[0])-1}: '
+            ))
 
         while not self.tarkista_rivi_ja_sarake(aloitus_solmu_x, aloitus_solmu_y):
-            aloitus_solmu_x = int(input(f'Anna aloitus-solmun rivi väliltä 0 - {len(self.kartta)-1}: '))
-            aloitus_solmu_y = int(input(f'Anna aloitus-solmun sarake väliltä 0 - {len(self.kartta[0])-1}: '))
+            aloitus_solmu_x = int(input(
+                f'Anna aloitus-solmun rivi väliltä 0 - {len(self.kartta)-1}: '
+                ))
+            aloitus_solmu_y = int(input(
+                f'Anna aloitus-solmun sarake väliltä 0 - {len(self.kartta[0])-1}: '
+                ))
 
         self.aloitus_solmu = (aloitus_solmu_x, aloitus_solmu_y)
 
-        lopetus_solmu_x = int(input(f'Anna lopetus-solmun rivi väliltä 0 - {len(self.kartta)-1}: '))
-        lopetus_solmu_y = int(input(f'Anna lopetus-solmun sarake väliltä 0 - {len(self.kartta[0])-1}: '))
+        lopetus_solmu_x = int(input(
+            f'Anna lopetus-solmun rivi väliltä 0 - {len(self.kartta)-1}: '
+            ))
+        lopetus_solmu_y = int(input(
+            f'Anna lopetus-solmun sarake väliltä 0 - {len(self.kartta[0])-1}: '
+            ))
 
         while not self.tarkista_rivi_ja_sarake(lopetus_solmu_x, lopetus_solmu_y):
-            lopetus_solmu_x = int(input(f'Anna lopetus-solmun rivi väliltä 0 - {len(self.kartta)-1}: '))
-            lopetus_solmu_y = int(input(f'Anna lopetus-solmun sarake väliltä 0 - {len(self.kartta[0])-1}: '))
+            lopetus_solmu_x = int(input(
+                f'Anna lopetus-solmun rivi väliltä 0 - {len(self.kartta)-1}: '
+                ))
+            lopetus_solmu_y = int(input(
+                f'Anna lopetus-solmun sarake väliltä 0 - {len(self.kartta[0])-1}: '
+                ))
 
         self.lopetus_solmu = (lopetus_solmu_x, lopetus_solmu_y)
 
