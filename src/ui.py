@@ -74,16 +74,15 @@ class Ui:
         dijkstra = Dijkstra(self.aloitus_solmu, self.lopetus_solmu, verkko, self.kartta)
         etaisyys = dijkstra.etsi_reitti()
         reitti_dijkstra = dijkstra.tulosta_reitti(etaisyys)
-        print(reitti_dijkstra)
         loppuaika_dijkstra = time.time()
         print('Algoritmi suoriutui ajassa: ', loppuaika_dijkstra-alkuaika_dijkstra, 'sekuntia')
         print('\n')
-        print('Dijkstran reitti:')
         kuljettu_reitti = apufunktiot.piirra_kartalle(self.kartta, reitti_dijkstra)
         if self.kartta_liian_suuri is True:
             self.kirjoita_tiedostoon('dijkstra', kuljettu_reitti)
             self.avaa_kartta('dijkstra.txt')
         else:
+            print('Dijkstran reitti:')
             for i in kuljettu_reitti:
                 print(i)
             print('\n')
@@ -96,11 +95,9 @@ class Ui:
         print('*******************************')
         edeltavat = jps.hae_reitti()
         reitti_jps = jps.tulosta_reitti(edeltavat, self.lopetus_solmu)
-        print(reitti_jps)
         loppuaika_jps = time.time()
         print('Algoritmi suoriutui ajassa: ', loppuaika_jps - alkuaika_jps, 'sekuntia')
         print('\n')
-        print('JPS:n reitti:')
         lisattavat = []
         for i in range(len(reitti_jps)-1):
             if apufunktiot.puuttuu_solmuja(reitti_jps[i], reitti_jps[i+1]):
@@ -112,6 +109,7 @@ class Ui:
             self.kirjoita_tiedostoon('jps', kuljettu_reitti)
             self.avaa_kartta('jps.txt')
         else:
+            print('JPS:n reitti:')
             for i in kuljettu_reitti:
                 print(i)
             print('\n')
