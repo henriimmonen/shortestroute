@@ -20,7 +20,7 @@ class Ui:
         self.kirjoita_tiedostoon('sydney', self.kartta)
         self.tarkista_kartan_koko()
 
-        if self.kartta_liian_suuri == True:
+        if self.kartta_liian_suuri is True:
             self.avaa_kartta(self.kartan_nimi)
         else:
             print('\n')
@@ -80,7 +80,7 @@ class Ui:
         print('\n')
         print('Dijkstran reitti:')
         kuljettu_reitti = apufunktiot.piirra_kartalle(self.kartta, reitti_dijkstra)
-        if self.kartta_liian_suuri == True:
+        if self.kartta_liian_suuri is True:
             self.kirjoita_tiedostoon('dijkstra', kuljettu_reitti)
             self.avaa_kartta('dijkstra.txt')
         else:
@@ -108,7 +108,7 @@ class Ui:
                     reitti_jps[i], reitti_jps[i+1])
         reitti_jps = reitti_jps + lisattavat
         kuljettu_reitti = apufunktiot.piirra_kartalle(self.kartta, reitti_jps)
-        if self.kartta_liian_suuri == True:
+        if self.kartta_liian_suuri is True:
             self.kirjoita_tiedostoon('jps', kuljettu_reitti)
             self.avaa_kartta('jps.txt')
         else:
@@ -129,10 +129,9 @@ class Ui:
         if self.kartta[rivi][sarake] == '@':
             print('Valittu solmu on seinäsolmu, valitse jokin toinen solmu')
             return False
-
         return True
 
-    def tarkista_kartan_koko(self):
+    def tarkista_kartan_koko(self): # pylint: disable=useless-return
         """Tarkistetaan voidaanko kartta näyttää komentorivillä"""
         if len(self.kartta[0]) > 30:
             self.kartta_liian_suuri = True
@@ -144,8 +143,8 @@ class Ui:
 
     def kirjoita_tiedostoon(self, algoritmi, kartta):
         """Kirjoitetaan kartta tekstitiedostoksi näyttämistä varten"""
-        f = open(f'{algoritmi}.txt', 'w')
-        for rivi in kartta:
-            f.write(rivi)
-            f.write('\n')
-        f.close()
+        with open(f'{algoritmi}.txt', 'w', encoding='utf-8') as kirjoittaja:
+            for rivi in kartta:
+                kirjoittaja.write(rivi)
+                kirjoittaja.write('\n')
+            kirjoittaja.close()
