@@ -6,7 +6,7 @@ Tämä jälkeen siirry komentorivillä kyseisen projektin juureen ja aja seuraav
 `poetry install`  
 
 Jonka jälkeen ohjelma käynnistetään komennolla:  
-`poetry src/index.py`  
+`python3 src/index.py`  
 
 Juuressa toimivia komentoja ovat:  
 `pytest src` (Testien ajaminen)  
