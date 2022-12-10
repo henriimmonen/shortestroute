@@ -1,7 +1,7 @@
 import math
 import heapq
 
-class Dijkstra(): # pylint: disable=too-many-instance-attributes
+class Dijkstra: # pylint: disable=too-many-instance-attributes
     def __init__(self, alku, loppu, verkko, kartta):
         self.aloitus_solmu = alku
         self.lopetus_solmu = loppu

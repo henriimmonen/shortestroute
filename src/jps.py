@@ -2,7 +2,7 @@ import heapq
 import math
 import apufunktiot
 
-class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
+class JumpPointSearch: # pylint: disable=too-many-instance-attributes
     def __init__(self, aloitus_solmu, lopetus_solmu, verkko, kartta):
         self.aloitus_solmu = aloitus_solmu
         self.lopetus_solmu = lopetus_solmu
