@@ -20,7 +20,7 @@ class JumpPointSearch(): # pylint: disable=too-many-instance-attributes
         """Runko algoritmin toiminnalle
 
         Returns:
-            sanakirja: Palautetaan sanakirja kuljetuista solmuista
+            self.edeltava: Palautetaan sanakirja kuljetuista solmuista
         """
         heapq.heappush(self.keko, (0, self.aloitus_solmu))
         while len(self.keko) != 0:

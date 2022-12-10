@@ -142,7 +142,6 @@ def laske_puuttuvat_solmut(alku_solmu, loppu_solmu):
         sarake += erotus_y
         if (rivi, sarake) != alku_solmu:
             puuttuvat_solmut.append((rivi, sarake))
-    puuttuvat_solmut = sorted(puuttuvat_solmut)
     return puuttuvat_solmut
 
 def puuttuu_solmuja(alku_solmu, loppu_solmu):
