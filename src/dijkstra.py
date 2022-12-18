@@ -19,11 +19,13 @@ class Dijkstra: # pylint: disable=too-many-instance-attributes
         Returns:
             self.edeltava: Lista jokaista solmua edeltäneestä solmusta
         """
-        heapq.heappush(self.keko, self.aloitus_solmu)
         self.etaisyys[self.aloitus_solmu[0]*len(self.kartta[0])+self.aloitus_solmu[1]] = 0
+        heapq.heappush(self.keko, (self.etaisyys[
+            self.aloitus_solmu[0]*len(self.kartta[0])+self.aloitus_solmu[1]
+            ], self.aloitus_solmu))
 
         while len(self.keko) > 0:
-            kasiteltava_solmu = heapq.heappop(self.keko)
+            kasiteltava_solmu = heapq.heappop(self.keko)[1]
 
             if kasiteltava_solmu in self.kasitellyt:
                 continue
@@ -49,7 +51,9 @@ class Dijkstra: # pylint: disable=too-many-instance-attributes
                     self.edeltava[naapuri[0]*len(self.kartta[0])+naapuri[1]] = (
                     kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1])
 
-                heapq.heappush(self.keko, naapuri)
+                heapq.heappush(self.keko, (self.etaisyys[
+                    naapuri[0]*len(self.kartta[0])+naapuri[1]
+                    ], naapuri))
         return self.edeltava
 
     def laske_etaisyys(self, solmu, naapuri):
