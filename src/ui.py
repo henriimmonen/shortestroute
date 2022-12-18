@@ -82,6 +82,7 @@ class Ui:
         reitti_dijkstra = dijkstra.tulosta_reitti(etaisyys)
         loppuaika_dijkstra = time.time()
         print('Algoritmi suoriutui ajassa: ', loppuaika_dijkstra-alkuaika_dijkstra, 'sekuntia')
+        print('Algoritmi kävi', len(dijkstra.kasitellyt), 'solmussa')
         print('\n')
         kuljettu_reitti = apufunktiot.piirra_kartalle(self.kartta, reitti_dijkstra)
         if self.kartta_liian_suuri is True:
@@ -103,6 +104,7 @@ class Ui:
         reitti_jps = jps.tulosta_reitti(edeltavat, self.lopetus_solmu)
         loppuaika_jps = time.time()
         print('Algoritmi suoriutui ajassa: ', loppuaika_jps - alkuaika_jps, 'sekuntia')
+        print('Algoritmi kävi', len(jps.kasitellyt), 'solmussa')
         print('\n')
         lisattavat = []
         for i in range(len(reitti_jps)-1):
