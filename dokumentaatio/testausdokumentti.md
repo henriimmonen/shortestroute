@@ -3,14 +3,12 @@
 ![testikattavuus](https://github.com/henriimmonen/shortestroute/blob/main/dokumentaatio/kuvat/testikattavuus.png)
 
 ### Dijkstran algoritmi
-Tällä hetkellä Dijkstran toiminta tapahtuu muutamassa eri funktiossa. Näitä voisi kuitenkin refaktoroida kattavampaa testausta ajatellen. Algoritmia kirjoittaessa testausta on suoritettu pääasiallisesti manuaalisesti, mutta ohjelman laajentamista ajatellen testausta (erityisesti reitin pituuteen ja sen vastaavuuteen jps:n tuottaman reitin kanssa) tulisi automatisoida.  
+Algoritmin toimintaa on testattu kurssin aikana niin automatisoiduin yksikkötestein, kuin manuaalisesti. Yksikkötestit keskittyvät funktioiden toiminnan varmistamiseen, sekä oikeiden solmujen ja reitin löytämiseen erilaisilla kartoilla. Manuaalisesti on katsottu ja laskettu, että reitti on todella lyhin mahdollinen pienillä kartoilla, sekä suuremmilla kartoilla visuaalisesti.
 
 ### Jump Point Search
-Kuten Dijkstran algoritmin kanssa, testausta on suoritettu runsaasti manuaalisesti. Suorituskykyä olisi kuitenkin hyvä testata vielä kattavammin kuin
- pelkän ajan perusteella.
+Kuten Dijkstran algoritmin kanssa, testausta on suoritettu runsaasti manuaalisesti. Vertailua Dijkstran algoritmiin on tehty suuremmilla kartoilla visuaalisesti. 
 
 ## Perustoiminnallisuuden testaaminen
-Ohjelma tulostaa terminaaliin kuljetun reitin, jonka perusteella on mahdollista tarkastella algoritmien toimintaa silmämääräisesti. Tämä tulee kuitenkin toteuttamaan myöhemmin niin, että kuljettu reitti myös piirretään tiedostoon ja näytetään käyttäjälle.
-
+Ohjelma tulostaa kartan ja kuljetun reitin molempien algoritmien kohdalla pienemmillä kartoilla. Suuremmilla kartoilla 
 ## Suorituskyky
 Tällä hetkellä algoritmien toimintaa verrataan ajallisesti. Myöhemmässä vaiheessa toteutetaan vertailua muilla parametreillä.
