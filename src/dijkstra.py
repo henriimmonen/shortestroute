@@ -12,8 +12,6 @@ class Dijkstra: # pylint: disable=too-many-instance-attributes
         inf = 10**9
         self.etaisyys = [inf for i in range(len(self.kartta[0])*len(self.kartta))]
         self.edeltava = [-1 for i in range(len(self.kartta[0])*len(self.kartta))]
-        self.etaisyys_maaliin = {self.aloitus_solmu: self.euklidinen_etaisyys(self.aloitus_solmu,
-            self.lopetus_solmu)}
 
     def etsi_reitti(self):
         """Etsitään lyhyin reitti
@@ -21,11 +19,11 @@ class Dijkstra: # pylint: disable=too-many-instance-attributes
         Returns:
             self.edeltava: Lista jokaista solmua edeltäneestä solmusta
         """
-        heapq.heappush(self.keko, (self.etaisyys_maaliin[self.aloitus_solmu], self.aloitus_solmu))
+        heapq.heappush(self.keko, self.aloitus_solmu)
         self.etaisyys[self.aloitus_solmu[0]*len(self.kartta[0])+self.aloitus_solmu[1]] = 0
 
         while len(self.keko) > 0:
-            kasiteltava_solmu = heapq.heappop(self.keko)[1]
+            kasiteltava_solmu = heapq.heappop(self.keko)
 
             if kasiteltava_solmu in self.kasitellyt:
                 continue
@@ -51,11 +49,7 @@ class Dijkstra: # pylint: disable=too-many-instance-attributes
                     self.edeltava[naapuri[0]*len(self.kartta[0])+naapuri[1]] = (
                     kasiteltava_solmu[0]*len(self.kartta[0])+kasiteltava_solmu[1])
 
-                self.etaisyys_maaliin[naapuri] = self.etaisyys[
-                        naapuri[0]*len(self.kartta[0])+naapuri[1]
-                        ] + self.euklidinen_etaisyys(naapuri,
-                    self.lopetus_solmu)
-                heapq.heappush(self.keko, (self.etaisyys_maaliin[naapuri], naapuri))
+                heapq.heappush(self.keko, naapuri)
         return self.edeltava
 
     def laske_etaisyys(self, solmu, naapuri):
@@ -101,9 +95,3 @@ class Dijkstra: # pylint: disable=too-many-instance-attributes
             if kasiteltava_solmu[1] == self.lopetus_solmu[1]:
                 return True
         return False
-
-    def euklidinen_etaisyys(self, alku, loppu):
-        """Lasketaan kahden koordinaatin välinen euklidinen etäisyys
-        """
-        etaisyys = math.sqrt((alku[0]-loppu[0])**2 + (alku[1]-loppu[1])**2)
-        return etaisyys
