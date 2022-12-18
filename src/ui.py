@@ -16,7 +16,13 @@ class Ui:
     def kysy_aloitus_lopetus(self):
         """Kysytään aloitus- ja lopetus-solmut"""
         self.kartan_nimi = input('Anna karttatiedoston nimi: ')
-        self.kartta = apufunktiot.alusta_kartta(f'./{self.kartan_nimi}')
+
+        try:
+            self.kartta = apufunktiot.alusta_kartta(f'./{self.kartan_nimi}')
+        except:
+            print('Karttaa ei löytynyt, syötä nimi uudelleen!')
+            self.kysy_aloitus_lopetus()
+
         self.kirjoita_tiedostoon('sydney', self.kartta)
         self.tarkista_kartan_koko()
 
