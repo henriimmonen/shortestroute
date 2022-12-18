@@ -1,7 +1,7 @@
 # Projektin määritelmä
-Projektin aiheena on kahden pisteen välisen lyhimmän reitin löytäminen käyttäen JPS (Jump Point Search) algoritmia. Tämän algoritmin toimintaa verrataan sitten Dijkstran algoritmin toimintaan.  
+Projektin aiheena on kahden reitinhakualgoritmin vertailu. Valitut algoritmit ovat JPS (Jump Point Search) sekä Dijkstran algoritmi.  
 
-Projekti toteutetaan Python-ohjelmointikielellä.  
+Projekti toteutetaan Python-ohjelmointikielellä.    
 
 ## Ongelman määrittely
 Tarkoituksena on toteuttaa reitinhaku kahdella eri algoritmilla. Karttapohjana käytän [Moving AI Lab:n](https://www.movingai.com/benchmarks/grids.html) karttaa, sillä ne ovat helposti saatavissa ASCII muodossa.  
@@ -20,8 +20,8 @@ Projektin dokumentaatio tulee olemaan suomenkielinen.
 Työn tekijä on tietojenkäsittelytieteen kandidaatin tutkintoa suorittava opiskelija.  
 
 ### Lähteet
-[Jump Point Search](http://users.cecs.anu.edu.au/~dharabor/data/papers/harabor-grastien-aaai11.pdf)
-[Wikipedia JPS](https://en.wikipedia.org/wiki/Jump_point_search)
-[Wikipedia Dijkstran algortimi](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
-[Wikipedia A*](https://en.wikipedia.org/wiki/A*_search_algorithm)
+[Jump Point Search](http://users.cecs.anu.edu.au/~dharabor/data/papers/harabor-grastien-aaai11.pdf)  
+[Wikipedia JPS](https://en.wikipedia.org/wiki/Jump_point_search)  
+[Wikipedia Dijkstran algortimi](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)  
+[Wikipedia A*](https://en.wikipedia.org/wiki/A*_search_algorithm)  
 
