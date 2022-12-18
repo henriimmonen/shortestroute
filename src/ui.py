@@ -19,7 +19,7 @@ class Ui:
 
         try:
             self.kartta = apufunktiot.alusta_kartta(f'./{self.kartan_nimi}')
-        except:
+        except FileNotFoundError:
             print('Karttaa ei löytynyt, syötä nimi uudelleen!')
             self.kysy_aloitus_lopetus()
 
