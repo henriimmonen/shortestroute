@@ -59,3 +59,19 @@ class TestRoute(unittest.TestCase):
         edellinen = dijkstra_este.etsi_reitti()
         reitti = dijkstra_este.tulosta_reitti(edellinen)
         self.assertEqual(reitti, [(0, 0), (0, 1), (0, 2), (0, 3), (1, 4), (2, 3), (2, 2), (2, 1), (2, 0)])
+
+    def test_reitin_pituus_on_oikein_pieni_kartta(self):
+        self.dijkstra.etsi_reitti()
+        self.assertEqual((2 + math.sqrt(2)), self.dijkstra.etaisyys[8])
+
+    def test_reitin_pituus_on_oikein_tyhja_kartta(self):
+        verkko_tyhja = self.apufunktiot.kaarilista(self.tyhja_kartta)
+        dijkstra_tyhja = Dijkstra((0, 0), (4, 4), verkko_tyhja, self.tyhja_kartta)
+        dijkstra_tyhja.etsi_reitti()
+        self.assertEqual((4*math.sqrt(2)), dijkstra_tyhja.etaisyys[24])
+
+    def test_reitin_pituus_on_oikein_este_kartta(self):
+        verkko_este = self.apufunktiot.kaarilista(self.este_kartta)
+        dijkstra_este = Dijkstra((0, 0), (2, 0), verkko_este, self.este_kartta)
+        dijkstra_este.etsi_reitti()
+        self.assertEqual((6 + 2*math.sqrt(2)), dijkstra_este.etaisyys[12])
