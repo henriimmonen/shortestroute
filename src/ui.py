@@ -71,18 +71,21 @@ class Ui:
 
     def aloita(self):
         """" Ohjelman käyttöliittymä """
-        verkko = apufunktiot.kaarilista(self.kartta)
+        alkuaika_dijkstra = time.time()
         print('\n')
         print('Dijkstran algoritmin ja Jump Point Search-algoritmin vertailu\n')
-        alkuaika_dijkstra = time.time()
+        verkko = apufunktiot.kaarilista(self.kartta)
         print('Dijkstran algoritmin tulos')
         print('*******************************')
         dijkstra = Dijkstra(self.aloitus_solmu, self.lopetus_solmu, verkko, self.kartta)
-        etaisyys = dijkstra.etsi_reitti()
-        reitti_dijkstra = dijkstra.tulosta_reitti(etaisyys)
+        edellinen = dijkstra.etsi_reitti()
+        reitti_dijkstra = dijkstra.tulosta_reitti(edellinen)
         loppuaika_dijkstra = time.time()
         print('Algoritmi suoriutui ajassa: ', loppuaika_dijkstra-alkuaika_dijkstra, 'sekuntia')
         print('Algoritmi kävi', len(dijkstra.kasitellyt), 'solmussa')
+        print('Kuljettu matka:', dijkstra.etaisyys[
+            self.lopetus_solmu[0]*len(self.kartta[0])+self.lopetus_solmu[1]
+            ])
         print('\n')
         kuljettu_reitti = apufunktiot.piirra_kartalle(self.kartta, reitti_dijkstra)
         if self.kartta_liian_suuri is True:
@@ -105,6 +108,7 @@ class Ui:
         loppuaika_jps = time.time()
         print('Algoritmi suoriutui ajassa: ', loppuaika_jps - alkuaika_jps, 'sekuntia')
         print('Algoritmi kävi', len(jps.kasitellyt), 'solmussa')
+        print('Kuljettu matka:', jps.etaisyys_solmuun.get(self.lopetus_solmu))
         print('\n')
         lisattavat = []
         for i in range(len(reitti_jps)-1):
