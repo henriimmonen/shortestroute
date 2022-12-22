@@ -7,6 +7,7 @@ class TestRoute(unittest.TestCase):
     def setUp(self):
         self.kartta = ['...', '.@@', '...']
         self.kartta_hyppysolmu = ['..@..', '..@..', '.@...', '.....']
+        self.kartta_hyppysolmu_oikea_vasen = ['..@', '...', '...']
         self.verkko = [[(0, 1), (1, 0)], [(0, 0), (0, 2)], [(0, 1)], [(0, 0), (2, 0), (2, 1)], [],
                        [], [(1, 0), (2, 1)], [(2, 0), (2, 2)], [(2, 1)]]
         self.jps = JumpPointSearch((0, 0), (2, 2), self.verkko, self.kartta)
@@ -41,7 +42,7 @@ class TestRoute(unittest.TestCase):
     def test_etsi_horisontaalisesti_tunnistaa_hyppysolmun_ylaoikea(self):
         verkko = self.apufunktiot.kaarilista(self.kartta_hyppysolmu)
         jps_hyppysolmu_ylaoikea = JumpPointSearch((0, 0), (3, 4), verkko, self.kartta_hyppysolmu)
-        self.assertEqual((2, 2), jps_hyppysolmu_ylaoikea.etsi_horisontaalisesti((2, 2), 0, 1))
+        self.assertEqual((2, 2), jps_hyppysolmu_ylaoikea.etsi_horisontaalisesti((2, 2), 0, -1))
 
     def test_etsi_horisontaalisesti_tunnistaa_hyppysolmun_alaoikea(self):
         verkko = self.apufunktiot.kaarilista(self.kartta_hyppysolmu)
