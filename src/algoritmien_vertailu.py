@@ -70,7 +70,7 @@ def algoritmien_reitin_pituusvertailu():
             print(ajo, kuljettu_matka_dijkstra, kuljettu_matka_jps)
             print('Kuljettu matka ei ole yhtä pitkä!')
             break
-        print(ajo, aloitus_solmu, lopetus_solmu)
+
     loppuaika = time.time()
     print(loppuaika-alku, 'sekuntia')
     print('Kuljetut matkat vastaavat molemmilla algoritmeilla toisiaan')
