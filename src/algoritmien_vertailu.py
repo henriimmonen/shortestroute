@@ -156,20 +156,20 @@ def aikavertailun_suoritus(aloitus_solmu, lopetus_solmu, kartta):
 def aikavaativuuden_vertailu(aloitus_solmu, lopetus_solmu, kartta):
     """Verrataan algoritmien vierailtujen solmujen määrää"""
     vieraillut_solmut_dijkstra = 0
-    for ajo in range(100): # pylint: disable=unused-variable
+    for ajo in range(10): # pylint: disable=unused-variable
         verkko = apufunktiot.kaarilista(kartta)
         dijkstra = Dijkstra(aloitus_solmu, lopetus_solmu, verkko, kartta)
         dijkstra.etsi_reitti()
         vieraillut_solmut_dijkstra += len(dijkstra.kasitellyt)
-    vieraillut_solmut_dijkstra = vieraillut_solmut_dijkstra/100
+    vieraillut_solmut_dijkstra = vieraillut_solmut_dijkstra/10
 
     vieraillut_solmut_jps = 0
-    for ajo in range(100):
+    for ajo in range(10):
         verkko = apufunktiot.kaarilista(kartta)
         jps = JumpPointSearch(aloitus_solmu, lopetus_solmu, verkko, kartta)
         jps.hae_reitti()
         vieraillut_solmut_jps += len(jps.kasitellyt)
-    vieraillut_solmut_jps = vieraillut_solmut_jps/100
+    vieraillut_solmut_jps = vieraillut_solmut_jps/10
 
     return vieraillut_solmut_dijkstra, vieraillut_solmut_jps
 
