@@ -18,5 +18,5 @@ Algoritmien O-analyysien tulokset ovat samanlaisia, mutta testiohjelmalla tarkas
 Jps-algoritmin tilavaativuus olisi mahdollista tiivistää, sillä verkon läpikäyminen etukäteen ei ole välttämätöntä tässä toteutuksessa. Naapureiden tarkistamiseen on jo olemassa hyvät metodit, joten käsittelyssä olevan solmun naapurit voisi tarkistaa ajonaikaisesti. Tämä jäi kuitenkin toteuttamatta kurssin laajuuden puitteissa.  
 
 ### Lähteet
-https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
-https://harablog.wordpress.com/2011/09/07/jump-point-search/
+https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm  
+https://harablog.wordpress.com/2011/09/07/jump-point-search/  
