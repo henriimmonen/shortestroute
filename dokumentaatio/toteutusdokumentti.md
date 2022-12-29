@@ -15,7 +15,7 @@ Tässä toteutuksessa Dijkstran- sekä Jump Point Search-algoritmin tilavaativuu
 Algoritmien O-analyysien tulokset ovat samanlaisia, mutta testiohjelmalla tarkasteltuna JPS:n toiminta vaikuttaa huomattavasti tehokkaammalta. Ajallisesti JPS suoriutui pidemmillä matkoilla lähes puolet nopeammin, mutta lyhyellä matkalla aikaa kului 0.3 ms pidempään. Jokaisella reitillä JPS tutki huomattavasti pienemmän osuuden solmuja kuin Dijkstra (kts. testausdokumentti). 
 
 ## Puutteet ja kehitysehdotukset
-Jps-algoritmin tilavaativuus olisi mahdollista tiivistää samaan kuin sen aikavaativuus, sillä verkon läpikäyminen etukäteen ei ole välttämätöntä tässä toteutuksessa. Naapureiden tarkistamiseen on jo olemassa hyvät metodit, joten käsittelyssä olevan solmun naapurit voisi tarkistaa ajonaikaisesti. Tämä jäi kuitenkin toteuttamatta kurssin laajuuden puitteissa.  
+Jps-algoritmin tilavaativuus olisi mahdollista tiivistää, sillä verkon läpikäyminen etukäteen ei ole välttämätöntä tässä toteutuksessa. Naapureiden tarkistamiseen on jo olemassa hyvät metodit, joten käsittelyssä olevan solmun naapurit voisi tarkistaa ajonaikaisesti. Tämä jäi kuitenkin toteuttamatta kurssin laajuuden puitteissa.  
 
 ### Lähteet
 https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
